@@ -7,15 +7,13 @@
 public class Cell {
 	// default value false
 	private boolean alive;
-	private int numNeighbors;
-	private String mark;
+	private String mark = "-";
 
 	/**
 	 * Default empty cell.
 	 */
 	public Cell() {
 		this.alive = false;
-		mark = "-";
 	}
 
 	/**
@@ -28,8 +26,6 @@ public class Cell {
 		this.alive = alive;
 		if (alive) {
 			mark = "o";
-		} else {
-			mark = "-";
 		}
 	}
 
@@ -40,19 +36,6 @@ public class Cell {
 	 */
 	public boolean isAlive() {
 		return alive;
-	}
-
-	public void updateNumNeighbors(int num) {
-		this.numNeighbors = num;
-	}
-
-	/**
-	 * Returns the number of existing neighbors.
-	 * 
-	 * @return integer between 0 and 8.
-	 */
-	public int numNeighbors() {
-		return numNeighbors;
 	}
 
 	@Override
