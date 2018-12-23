@@ -1,20 +1,24 @@
+
 /**
  * Represents the rectangular environment on which the Cells live.
  * 
  * @author dychoi
  *
  */
+import java.util.Random;
+
 public class Board {
 
 	private int height, width;
 	private Cell[][] board;
+	private Random rand;
 
 	public Board(int height, int width) {
 		board = new Cell[height][width];
 		this.height = board.length;
 		this.width = board[0].length;
 		fillEmptyBoard();
-
+		rand = new Random();
 	}
 
 	/**
@@ -26,6 +30,23 @@ public class Board {
 	 */
 	public boolean placeCell(int y, int x) {
 		return placeCell(y, x, true);
+	}
+
+	/**
+	 * Randomly place a given number of living cells on the board.
+	 * 
+	 * @param num
+	 */
+	public void placeCells(int num) {
+		int left = num;
+		while (left > 0) {
+			int y = rand.nextInt(this.height);
+			int x = rand.nextInt(this.width);
+			boolean result = this.placeCell(y, x);
+			if (result) {
+				left--;
+			}
+		}
 	}
 
 	/**

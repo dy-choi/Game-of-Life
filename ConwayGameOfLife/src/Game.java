@@ -1,30 +1,29 @@
 
 public class Game {
-	Board current;
-	
+	Board board;
+
 	public Game(int height, int width) {
-		current = new Board(height, width);
+		board = new Board(height, width);
+		// occupy 33% of the board randomly
+		board.placeCells(height * width / 3);
 	}
-	
+
 	public int play() {
 		int numRounds = 0;
 		boolean equilibrium = false;
 		while (!equilibrium) {
-			Board next = current.nextBoard();
-			equilibrium = current.equals(next);
-			current = next.copy();
+			board.print();
+			Board next = board.nextBoard();
+			equilibrium = board.equals(next);
+			board = next.copy();
 			numRounds++;
 		}
-		return numRounds;		
+		return numRounds;
 	}
-	
+
 	public static void main(String[] args) {
-		Board vline = new Board(3, 3);
-		Board hline = new Board(3, 3);
-		for (int i = 0; i < 3; i++) {
-			vline.placeCell(i, 1);
-			hline.placeCell(1, i);
-		}
+		Game game = new Game(10, 10);
+		game.play();
 	}
 
 }
