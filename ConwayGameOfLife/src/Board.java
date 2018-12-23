@@ -102,6 +102,21 @@ public class Board {
 	}
 
 	/**
+	 * Make a copy of the current board.
+	 * 
+	 * @return
+	 */
+	public Board copy() {
+		Board copy = new Board(width, height);
+		for (int i = 0; i < height; i++) {
+			for (int j = 0; j < width; j++) {
+				copy.board[i][j] = new Cell(this.isOccupied(i, j));
+			}
+		}
+		return copy;
+	}
+
+	/**
 	 * Counts the number of neighbors that are alive.
 	 * 
 	 * @param y

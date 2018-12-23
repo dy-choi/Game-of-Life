@@ -14,6 +14,7 @@ public class BoardTest {
 		b3 = new Board(5, 4);
 		vline = new Board(3, 3);
 		hline = new Board(3, 3);
+		// lines
 		for (int i = 0; i < 3; i++) {
 			vline.placeCell(i, 1);
 			hline.placeCell(1, i);
@@ -77,9 +78,32 @@ public class BoardTest {
 	}
 
 	@Test
-	public void testNextBoard() {
+	public void testNextBoardLine() {
 		assertTrue(hline.nextBoard().equals(vline));
 		assertTrue(vline.nextBoard().equals(hline));
 		assertTrue(hline.nextBoard().nextBoard().equals(hline));
+	}
+
+	@Test
+	public void testNextBoardSquare() {
+		// 2 x 2 squares are still lives
+		b1.placeCell(0, 0);
+		b1.placeCell(0, 1);
+		b1.placeCell(1, 0);
+		b1.placeCell(1, 1);
+		assertTrue(b1.nextBoard().equals(b1));
+		assertTrue(b1.nextBoard().nextBoard().equals(b1));
+	}
+
+	@Test
+	public void testNextBoardFish() {
+		// fish shapes are also still lives
+		b2.placeCell(0, 0);
+		b2.placeCell(0, 1);
+		b2.placeCell(1, 0);
+		b2.placeCell(1, 2);
+		b2.placeCell(2, 1);
+		assertTrue(b2.nextBoard().equals(b2));
+		assertTrue(b2.nextBoard().nextBoard().equals(b2));
 	}
 }
